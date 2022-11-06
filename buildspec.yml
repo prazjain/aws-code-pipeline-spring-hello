@@ -1,0 +1,23 @@
+version: 0.2
+
+# Reference : https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html
+phases:
+  install:
+    runtime-versions:
+      java: corretto11
+  pre_build:
+    commands:
+      - echo Build begin
+  build:
+    commands:
+      - mvn clean package
+  post_build:
+    commands:
+      - echo Build completed
+artifacts:
+  files:
+    - target/*.jar
+    - scripts/*.sh
+    - appspec.yml
+  #com/mycompany/app/HelloWorld.java, specifying yes will place this file in /HelloWorld.java
+  discard-paths: yes
